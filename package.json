@@ -1,0 +1,27 @@
+{
+  "name": "investment_api_2020",
+  "version": "1.0.0",
+  "description": "An NODEJS api that I will use to track my investments and returns.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon -r esm server/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rustyraz/investment_api_2020.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rustyraz/investment_api_2020/issues"
+  },
+  "homepage": "https://github.com/rustyraz/investment_api_2020#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "joi": "^14.3.1"
+  }
+}
