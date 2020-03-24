@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import Joi from 'joi';
 import investments from '../dummy_data/investments_list.json';
+import authorize from '../middlewares/authorize';
 
 const router = Router();
 
@@ -14,7 +15,7 @@ function validateInvestment(investment){
     return Joi.validate(investment, schema);
 }
 
-router.post('/', (req, res) => {
+router.post('/', authorize, (req, res) => {
     const { error } = validateInvestment(req.body);
     if(error){
         res.status(400).send(error.details[0].message);
@@ -34,7 +35,7 @@ router.post('/', (req, res) => {
     res.send(investment);
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', authorize, (req, res) => {
     const investment = investments.find(c => c.id === parseInt(req.params.id));
     if(!investment) res.status(404).send("System cannot find a record of what you are looking for");
 

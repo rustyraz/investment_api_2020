@@ -1,10 +1,11 @@
 import { Router } from 'express';
 import investments_list from '../dummy_data/investments_list.json';
+import authorize from '../middlewares/authorize';
 
 const router = Router();
 
 //LIST ALL
-router.get('/', (req, res) => {
+router.get('/', authorize, (req, res) => {
     res.send(investments_list);
 });
 
