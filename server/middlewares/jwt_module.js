@@ -6,7 +6,7 @@ import fs from 'fs';
 const privateKey = fs.readFileSync((__dirname+'/../config/jwt/private.key'), 'utf8');
 const publicKey = fs.readFileSync((__dirname+'/../config/jwt/public.key'), 'utf8');
 
-module.exports = {
+export default {
     sign: (payload, $Options) => {
         /*
             sOptions = {
@@ -26,13 +26,13 @@ module.exports = {
             issuer: $Options.issuer,
             subject: $Options.subject,
             audience: $Options.audience,
-            expires: "30d", //30days validity
+            expiresIn: "30d", //30days validity
             algorithm: "RS256" 
         };
         return jwt.sign(payload, privateKey, signOptions);
     },
 
-    verify: (token, $Option) =>{
+    verify: (token, $Options) =>{
         /*
             vOption = {
                 issuer: "Authorization/Resource/This server",
@@ -41,7 +41,7 @@ module.exports = {
             }
         */
        let verifyOptions = {
-           issuer: $Option.issuer,
+           issuer: $Options.issuer,
            subject: $Options.subject,
            audience: $Options.audience,
            expiresIn: "30d",
