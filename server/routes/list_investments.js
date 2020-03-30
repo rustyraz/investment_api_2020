@@ -10,7 +10,7 @@ router.get('/', authorize, (req, res) => {
 });
 
 //LIST BY ID
-router.get('/:id', (req, res) => {
+router.get('/:id', authorize, (req, res) => {
     const investment = investments_list.find( c => c.id === parseInt(req.params.id));
     if(!investment) res.status(404).send('Ooooops! System could not find what you were looking for!');
     res.send(investment);

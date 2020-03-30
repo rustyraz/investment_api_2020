@@ -20,16 +20,19 @@ export default {
          * Along with the email and password, the client must pass a client identity for our server to know for whom the token is to be signed.
          * For example webaddress or app name
          */
+        return jwt.sign(payload, privateKey, $Options);
+    },
 
+    refreshToken: (payload, $Options) => {
+        //create a refresh token without expiration time. we will handle that manually
         //Token signing options
         let signOptions = {
             issuer: $Options.issuer,
             subject: $Options.subject,
             audience: $Options.audience,
-            expiresIn: "30d", //30days validity
-            algorithm: "RS256" 
+            algorithm: $Options.algorithm 
         };
-        return jwt.sign(payload, privateKey, signOptions);
+        return jwt.sign(payload, privateKey, signOptions); 
     },
 
     verify: (token, $Options) =>{
@@ -40,15 +43,8 @@ export default {
                 audience: "Client/FrontEnd_Identity" // this should be provided by the client
             }
         */
-       let verifyOptions = {
-           issuer: $Options.issuer,
-           subject: $Options.subject,
-           audience: $Options.audience,
-           expiresIn: "30d",
-           algorithm: ["RS256"]
-       };
         try{
-            return jwt.verify(token, publicKey, verifyOptions);
+            return jwt.verify(token, publicKey, $Options);
         }catch (err){
             return false;
         }

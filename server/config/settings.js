@@ -1,17 +1,16 @@
 export default {
-    jwtSecret : 'sometopsecretkeyforjsonwetoken',
     jwtSignOptions: {
         issuer: 'MyCompany Corp',
-        subject: 'pngesh@mycompany.com',
+        subject: 'admin@mycompany.com',
         audience: 'http://mycompany.com',
-        expiresIn: "30d",
+        expiresIn: "30s",
         algorithm: "RS256"
     },
     jwtVerifyOptions: {
         issuer: 'MyCompany Corp',
-        subject: 'pngesh@mycompany.com',
+        subject: 'admin@mycompany.com',
         audience: 'http://mycompany.com',
-        expiresIn: "30d",
+        expiresIn: "30s",
         algorithm: ["RS256"]
     }
 }

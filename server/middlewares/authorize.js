@@ -1,5 +1,3 @@
-import jwt from 'jsonwebtoken';
-import fs from 'fs';
 import config from '../config/settings';
 import jwt_token_manager from './jwt_module';
 
@@ -30,7 +28,7 @@ export default (req, res, next) => {
         }
         
     }else{
-        token = jwt_token_manager.sign(user_payload,config.jwtSignOptions);//this should be done after login
+        //token = jwt_token_manager.sign(user_payload,config.jwtSignOptions);//this should be done after login
         res.status(403).json({
             error : "No token provided",
             generatedToken: token
