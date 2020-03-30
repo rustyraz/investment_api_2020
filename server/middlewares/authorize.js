@@ -1,11 +1,11 @@
 import config from '../config/settings';
 import jwt_token_manager from './jwt_module';
 
-const user_payload = { 
-    user_email: "pngesh@gmail.com",
-    user_category: "admin",
-    other_data: "awesome"
-}
+// const user_payload = { 
+//     user_email: "pngesh@gmail.com",
+//     user_category: "admin",
+//     other_data: "awesome"
+// }
 
 export default (req, res, next) => {
     const authorizationHeader = req.headers['authorization'];
@@ -30,8 +30,7 @@ export default (req, res, next) => {
     }else{
         //token = jwt_token_manager.sign(user_payload,config.jwtSignOptions);//this should be done after login
         res.status(403).json({
-            error : "No token provided",
-            generatedToken: token
+            error : "No token provided"
         });
     }
 }

@@ -28,16 +28,16 @@ router.post('/token', (req, res) => {
     if(refresh_token == null) return res.sendStatus(401);
     if(!refreshTokens.includes(refresh_token)){
         //refresh token not found in the list        
-        return res.sendStatus(403);
+        return res.status(403).send('Forbiden access');
     }else{
         //refresh token found in the list of valid refresh tokens
         const verified_token = jwt_token_manager.verify(refresh_token, config.jwtVerifyOptions);
-        console.log(verified_token);
+        
         if(verified_token){
             const access_token = jwt_token_manager.sign({username : verified_token}, config.jwtSignOptions);
             res.json({access_token});
         }else{
-            return res.sendStatus(403);
+            return res.status(403).send('Invalid token');
         }
     } 
     
@@ -47,7 +47,7 @@ router.post('/token', (req, res) => {
 router.delete('/logout', (req, res) => {
     //check throught the database for the refreshtoken and delete it
     refreshTokens = refreshTokens.filter(token => token !== req.body.token);
-    res.sendStatus(204);
+    res.status(204).send('Logout successful');
 });
 
 export default router;
