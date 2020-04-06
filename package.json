@@ -4,7 +4,9 @@
   "description": "An NODEJS api that I will use to track my investments and returns.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -r esm server/app.js"
+    "start": "cross-env NODE_ENV=production nodemon -r esm server/app.js",
+    "development": "cross-env NODE_ENV=development nodemon -r esm server/app.js",
+    "test": "cross-env NODE_ENV=test mocha -r esm ./server/test --exit"
   },
   "repository": {
     "type": "git",
@@ -20,13 +22,21 @@
     "axios": "^0.19.2",
     "bcrypt": "^4.0.1",
     "body-parser": "^1.19.0",
+    "bookshelf": "^1.1.1",
     "cors": "^2.8.5",
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "joi": "^14.3.1",
-    "jsonwebtoken": "^8.5.1"
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.20.13",
+    "pg": "^7.18.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "babel-register": "^6.26.0",
+    "chai": "^4.2.0",
+    "cross-env": "^7.0.2",
+    "mocha": "^7.1.1",
+    "nodemon": "^2.0.2",
+    "supertest": "^4.0.2"
   }
 }
