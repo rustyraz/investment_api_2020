@@ -11,6 +11,9 @@ const queries = {
     getUserByEmail(email){
         return db_connection('users').where('email', email);
     },
+    registerUser(user){
+        return db_connection('users').insert(user, '*');
+    },
     //get all investments
     getAllInvestments(){
         return db_connection('investments')

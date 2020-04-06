@@ -7,15 +7,45 @@ function isIdValid(req, res, next){
     if(!isNaN(req.params.id)) return next();
     res.status(400).send({
         error: true,
-        errorMessage: "Invalid ID"
+        message: "Invalid ID"
     });
     //next(new Error('Invalid ID'));
 }
 
-router.post('/register', (req, res) => {
+function isUserValid(user){ 
+    const hasEmail = typeof user.email == 'string' && user.email.trim() != "";
+    const hasPassword = typeof user.password == 'string' && user.password.trim() != "";
+    return hasEmail && hasPassword;
+}
+
+router.post('/register', async (req, res) => {
     //get the username / email , password
-    const email = req.body.email;
-    const password = req.body.password;
+    if(isUserValid(req.body)){
+        //insert into database
+        const user = {
+            email: req.body.email,
+            password: req.body.password,
+            name: req.body.name ? req.body.name : ""
+        };
+        //check if user already exists
+        const userExists = await queries.getUserByEmail(user.email);
+        if(userExists && userExists.length > 0){
+            res.status(400).send({
+                error: true,
+                message: "Email already registered!"
+            });
+        }else{    
+            queries.registerUser(user).then(users => {
+                res.send(users[0]);
+            });
+        }
+        
+    }else{
+        res.status(400).send({
+            error: true,
+            message: "Invalid user"
+        });
+    }
 });
 
 router.get('/users', async (req, res) => {
