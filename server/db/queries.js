@@ -12,7 +12,7 @@ const queries = {
         return db_connection('users').where('email', email);
     },
     registerUser(user){
-        return db_connection('users').insert(user, '*');
+        return db_connection('users').insert(user, '*'); //will return for us the the saved record with the ID
     },
     //get all investments
     getAllInvestments(){

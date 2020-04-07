@@ -13,8 +13,14 @@ const users = [
     },
     { id: 3, email: 'thor@marvel.com', password: '1111', name: 'Thor' }
   ];
+  const new_user = {
+    email: "test@test.com",
+    password: "12345677",
+    name: "Test test"
+  };
 
   module.exports = {
-      users
+      users,
+      new_user
   }
   

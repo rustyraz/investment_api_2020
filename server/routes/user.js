@@ -55,7 +55,6 @@ router.get('/users', async (req, res) => {
 
 router.get('/users/:id', isIdValid, async(req, res) => {
     const user = await queries.getUserById(req.params.id);
-    console.log(req.params.id);
     if(user && user.length > 0){
         res.send(user);
     }else{
