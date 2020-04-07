@@ -79,4 +79,36 @@ router.get('/users/email/:email', async(req, res) => {
     
 });
 
+router.put('/users/:id', isIdValid, async(req, res) => {
+    //we will update the name only for now
+    const updateUserData = {
+        name: req.body.name
+    };
+    const updatedUser = await queries.updateUser(req.params.id, updateUserData);
+    
+    if(updatedUser){
+        res.send(updatedUser[0]);
+    }else{
+        res.send(400).send({
+            error: true,
+            message: "Could not update user data"
+        });
+    }
+});
+
+router.delete('/users/:id', isIdValid, async(req, res)=>{
+    const deleteUserRequest = await queries.deleteUser(req.params.id);
+    if(deleteUserRequest){
+        res.send({
+            success: true,
+            message: "Deleted successfully!"
+        });
+    }else{
+        res.status(400).send({
+            error: true,
+            message: "Error encountered while trying to delete!"
+        });
+    } 
+});
+
 export default router;
