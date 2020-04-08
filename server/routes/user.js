@@ -49,7 +49,8 @@ router.post('/register', async (req, res) => {
 });
 
 router.get('/users', async (req, res) => {
-    const users = await queries.getAllUsers();
+    const { email, name } = req.query; //allow filter by email
+    const users = await queries.getAllUsers({ email, name });
     res.send(users);    
 });
 

@@ -2,8 +2,15 @@ import db_connection from './knex';
 
 const queries = {
     //USERS queries
-    getAllUsers(){
-        return db_connection('users');
+    getAllUsers(query){
+        const knexQuery = db_connection('users');
+        if(query.email){
+            knexQuery.where('email',query.email);
+        }
+        if(query.name){
+            knexQuery.where('name','ilike',`%${query.name}%`); //we can look for lowercase and uppercase
+        }
+        return knexQuery;
     },
     getUserById(id){
         return db_connection('users').where('id',id);
