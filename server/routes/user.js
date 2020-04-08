@@ -49,7 +49,7 @@ router.post('/register', async (req, res) => {
 });
 
 router.get('/users', async (req, res) => {
-    const { email, name } = req.query; //allow filter by email
+    const { email, name } = req.query; //allow filter by email and name filter
     const users = await queries.getAllUsers({ email, name });
     res.send(users);    
 });

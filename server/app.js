@@ -30,16 +30,16 @@ app.use(API_PREFIX, access_routes);
 //users handler
 app.use(API_PREFIX, user);
 //app.use(`${API_PREFIX}users/:email/email`,user);
-app.use(`${API_PREFIX}investments`, listing_investments);
-app.use(`${API_PREFIX}investments/:id`, listing_investments);
+app.use(`${API_PREFIX}/investments`, listing_investments);
+//app.use(`${API_PREFIX}/investments/:id`, listing_investments);
 //CREATE request handlers
-app.use(`${API_PREFIX}investments`, create_update_investment);
+app.use(`${API_PREFIX}/investments`, create_update_investment);
 //UPDATE request handler
-app.use(`${API_PREFIX}investments`, create_update_investment);
+app.use(`${API_PREFIX}/investments`, create_update_investment);
 //DELETE request handler
-app.use(`${API_PREFIX}investments`, delete_investment);
+app.use(`${API_PREFIX}/investments`, delete_investment);
 //for forex data
-app.use(`${API_PREFIX}forex`, forex_api);
+app.use(`${API_PREFIX}/forex`, forex_api);
 
 if(process.env.NODE_ENV == 'test'){
     //if we are in the test

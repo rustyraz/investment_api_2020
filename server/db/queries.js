@@ -18,6 +18,12 @@ const queries = {
     getUserByEmail(email){
         return db_connection('users').where('email', email);
     },
+    loginUser(user){
+        return db_connection('users').select(['id','email','name']).where({
+            email:user.email,
+            password:user.password
+        });
+    },
     registerUser(user){
         return db_connection('users').insert(user, '*'); //will return for us the the saved record with the ID
     },
